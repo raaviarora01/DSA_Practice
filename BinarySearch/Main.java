@@ -28,7 +28,18 @@ public class Main {
     // FindSquareRoot sqrt = new FindSquareRoot();
     // System.out.println(sqrt.floorSqrt(28));
 
-    System.out.println(FindNthRoot.nthRoot(81, 4));
+    // System.out.println(FindNthRoot.nthRoot(81, 4));
+
+    // System.out.println(KokoEatingBananas.minEatingSpeed(new int[] { 30, 11, 23,
+    // 4, 20 }, 6));
+
+    // System.out.println(MinDaysToMakeMBouquets.minDays(new int[] { 1, 10, 3, 10, 2
+    // }, 3, 1));
+
+    // System.out.println(FindSmallestDivisor.smallestDivisor(new int[] { 1, 2, 5, 9
+    // }, 6));
+
+    System.out.println(CapacityToShipPackages.shipWithinDays(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, 5));
 
   }
 }
