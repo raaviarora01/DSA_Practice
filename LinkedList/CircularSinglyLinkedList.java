@@ -1,39 +1,53 @@
 package LinkedList;
 
-class Node {
+class CircularNode {
     int data;
-    Node next;
+    CircularNode next;
+    CircularNode prev;
 
-    public Node(int data) {
+    public CircularNode(int data) {
         this.data = data;
         this.next = null;
     }
 }
 
-public class SinglyLinkedList {
-    Node head;
+public class CircularSinglyLinkedList {
+    CircularNode head, tail;
+
+    public CircularSinglyLinkedList() {
+        head = tail = null;
+    }
+
+    // Create doubly linked list
+    public void createList(int data) {
+        CircularNode newNode = new CircularNode(data);
+        head = tail = newNode;
+        newNode.next = head;
+    }
 
     // Insert at beginning
     public void insertAtStart(int data) {
-        Node newNode = new Node(data);
+        if (head == null) {
+            createList(data);
+            return;
+        }
+        CircularNode newNode = new CircularNode(data);
         newNode.next = head;
         head = newNode;
+        tail.next = newNode;
     }
 
     // Insert at end
     public void insertAtEnd(int data) {
-        Node newNode = new Node(data);
-        if (head == null) {
-            head = newNode;
+        if (tail == null) {
+            createList(data);
             return;
         }
 
-        Node temp = head;
-        while (temp.next != null) {
-            temp = temp.next;
-        }
-
-        temp.next = newNode;
+        CircularNode newNode = new CircularNode(data);
+        newNode.next = head;
+        tail.next = newNode;
+        tail = newNode;
     }
 
     // Insert at a specific position
@@ -43,19 +57,22 @@ public class SinglyLinkedList {
             return;
         }
 
-        Node newNode = new Node(data);
-        Node temp = head;
-        for (int i = 0; i < pos - 1 && temp != head; i++) {
+        CircularNode newNode = new CircularNode(data);
+        CircularNode temp = head;
+        for (int i = 0; i < pos - 1 && temp.next != head; i++) {
             temp = temp.next;
         }
 
         if (temp == null) {
-            System.out.println("Position out of bounds");
+            System.out.println("Invalid position");
             return;
         }
 
         newNode.next = temp.next;
         temp.next = newNode;
+        if (temp == tail) {
+            tail = newNode;
+        }
     }
 
     // Delete from beginning
@@ -63,29 +80,31 @@ public class SinglyLinkedList {
         if (head == null) {
             System.out.println("List is empty");
             return;
+        } else if (head == tail) {
+            head = tail = null;
+            return;
         }
         head = head.next;
+        tail.next = head;
     }
 
     // Delete from end
     public void deleteAtEnd() {
-        if (head == null) {
+        if (tail == null) {
             System.out.println("List is empty");
             return;
-        }
-
-        if (head.next == null) {
-            head = null;
+        } else if (head == tail) {
+            head = tail = null;
             return;
         }
 
-        Node temp = head;
-        while (temp.next.next != null) {
+        CircularNode temp = head;
+        while (temp.next != tail) {
             temp = temp.next;
         }
 
-        temp.next = null;
-
+        temp.next = head;
+        tail = temp;
     }
 
     // Delete from specific position
@@ -95,23 +114,21 @@ public class SinglyLinkedList {
             return;
         }
 
-        Node temp = head;
-        for (int i = 0; i < pos - 1 && temp != null; i++) {
+        CircularNode temp = head;
+        for (int i = 0; i < pos - 1 && temp.next != head; i++) {
             temp = temp.next;
         }
 
-        if (temp == null || temp.next == null) {
-            System.out.println("Position out of bounds");
-            return;
-        }
-
         temp.next = temp.next.next;
-
+        if (temp.next == tail) {
+            tail = temp;
+        }
     }
 
     // Delete entire list
     public void deleteEntireList() {
         head = null;
+        tail = null;
     }
 
     // Print the list
@@ -120,42 +137,42 @@ public class SinglyLinkedList {
             System.out.println("List is empty");
             return;
         }
-        Node temp = head;
-        while (temp != null) {
+        CircularNode temp = head;
+        do {
             System.out.print(temp.data + "->");
             temp = temp.next;
-        }
+        } while (temp != head);
         System.out.println("null");
     }
 
-    // Traverse the list
-    public int traverseList() {
+    // Size of list
+    public int size() {
         if (head == null) {
             System.out.println("List is empty");
             return 0;
         }
-        Node temp = head;
+        CircularNode temp = head;
         int count = 0;
-        while (temp != null) {
+        do {
             temp = temp.next;
             count++;
-        }
+        } while (temp != head);
         System.out.println("Size of the list : " + count);
         return count;
     }
 
     // Search in the list
     public boolean search(int key) {
-        Node temp = head;
+        CircularNode temp = head;
         int i = 0;
-        while (temp != null) {
+        do {
             if (temp.data == key) {
                 System.out.println(key + " is found at location: " + i);
                 return true;
             }
             temp = temp.next;
             i++;
-        }
+        } while (temp != head);
 
         System.out.println("Node not found!!");
         return false;

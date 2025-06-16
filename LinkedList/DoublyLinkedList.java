@@ -1,39 +1,53 @@
 package LinkedList;
 
-class Node {
+class DoublyNode {
     int data;
-    Node next;
+    DoublyNode next;
+    DoublyNode prev;
 
-    public Node(int data) {
+    public DoublyNode(int data) {
         this.data = data;
         this.next = null;
+        this.prev = null;
     }
 }
 
-public class SinglyLinkedList {
-    Node head;
+public class DoublyLinkedList {
+    DoublyNode head, tail;
+
+    public DoublyLinkedList() {
+        head = tail = null;
+    }
+
+    // Create doubly linked list
+    public void createList(int data) {
+        DoublyNode newNode = new DoublyNode(data);
+        head = tail = newNode;
+    }
 
     // Insert at beginning
     public void insertAtStart(int data) {
-        Node newNode = new Node(data);
+        if (head == null) {
+            createList(data);
+            return;
+        }
+        DoublyNode newNode = new DoublyNode(data);
         newNode.next = head;
+        head.prev = newNode;
         head = newNode;
     }
 
     // Insert at end
     public void insertAtEnd(int data) {
-        Node newNode = new Node(data);
-        if (head == null) {
-            head = newNode;
+        if (tail == null) {
+            createList(data);
             return;
         }
 
-        Node temp = head;
-        while (temp.next != null) {
-            temp = temp.next;
-        }
-
-        temp.next = newNode;
+        DoublyNode newNode = new DoublyNode(data);
+        newNode.prev = tail;
+        tail.next = newNode;
+        tail = newNode;
     }
 
     // Insert at a specific position
@@ -43,9 +57,9 @@ public class SinglyLinkedList {
             return;
         }
 
-        Node newNode = new Node(data);
-        Node temp = head;
-        for (int i = 0; i < pos - 1 && temp != head; i++) {
+        DoublyNode newNode = new DoublyNode(data);
+        DoublyNode temp = head;
+        for (int i = 0; i < pos - 1 && temp != null; i++) {
             temp = temp.next;
         }
 
@@ -54,8 +68,15 @@ public class SinglyLinkedList {
             return;
         }
 
+        newNode.prev = temp;
         newNode.next = temp.next;
+        if (temp.next != null) {
+            temp.next.prev = newNode;
+        }
         temp.next = newNode;
+        if (temp == tail) {
+            tail = newNode;
+        }
     }
 
     // Delete from beginning
@@ -63,29 +84,26 @@ public class SinglyLinkedList {
         if (head == null) {
             System.out.println("List is empty");
             return;
+        } else if (head == tail) {
+            head = tail = null;
+            return;
         }
         head = head.next;
+        head.prev = null;
     }
 
     // Delete from end
     public void deleteAtEnd() {
-        if (head == null) {
+        if (tail == null) {
             System.out.println("List is empty");
             return;
-        }
-
-        if (head.next == null) {
-            head = null;
+        } else if (head == tail) {
+            head = tail = null;
             return;
         }
 
-        Node temp = head;
-        while (temp.next.next != null) {
-            temp = temp.next;
-        }
-
-        temp.next = null;
-
+        tail = tail.prev;
+        tail.next = null;
     }
 
     // Delete from specific position
@@ -95,32 +113,37 @@ public class SinglyLinkedList {
             return;
         }
 
-        Node temp = head;
-        for (int i = 0; i < pos - 1 && temp != null; i++) {
+        DoublyNode temp = head;
+        for (int i = 0; i < pos && temp != null; i++) {
             temp = temp.next;
         }
 
-        if (temp == null || temp.next == null) {
-            System.out.println("Position out of bounds");
+        if (temp == null) {
+            System.out.println("Invalid position");
             return;
         }
-
-        temp.next = temp.next.next;
-
+        temp.prev.next = temp.next;
+        if (temp.next != null) {
+            temp.next.prev = temp.prev;
+        }
+        if (temp == tail) {
+            tail = temp.prev;
+        }
     }
 
     // Delete entire list
     public void deleteEntireList() {
         head = null;
+        tail = null;
     }
 
-    // Print the list
-    public void printList() {
+    // Print the list forward
+    public void printForward() {
         if (head == null) {
             System.out.println("List is empty");
             return;
         }
-        Node temp = head;
+        DoublyNode temp = head;
         while (temp != null) {
             System.out.print(temp.data + "->");
             temp = temp.next;
@@ -128,13 +151,27 @@ public class SinglyLinkedList {
         System.out.println("null");
     }
 
-    // Traverse the list
-    public int traverseList() {
+    // Print the list backward
+    public void printBackward() {
+        if (head == null) {
+            System.out.println("List is empty");
+            return;
+        }
+        DoublyNode temp = tail;
+        while (temp != null) {
+            System.out.print(temp.data + "->");
+            temp = temp.prev;
+        }
+        System.out.println("null");
+    }
+
+    // Size of list
+    public int size() {
         if (head == null) {
             System.out.println("List is empty");
             return 0;
         }
-        Node temp = head;
+        DoublyNode temp = head;
         int count = 0;
         while (temp != null) {
             temp = temp.next;
@@ -146,7 +183,7 @@ public class SinglyLinkedList {
 
     // Search in the list
     public boolean search(int key) {
-        Node temp = head;
+        DoublyNode temp = head;
         int i = 0;
         while (temp != null) {
             if (temp.data == key) {
