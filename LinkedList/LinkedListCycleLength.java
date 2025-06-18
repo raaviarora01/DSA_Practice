@@ -8,36 +8,45 @@ package LinkedList;
 
 import java.util.HashMap;
 
-public class LinkedListCycle {
+public class LinkedListCycleLength {
     // Brute Force Approach - TC -> O(N * 2 * log(N)), SC -> O(N)
-    public boolean hasCycle(LLNode head) {
+    public int cycleLength(LLNode head) {
         HashMap<LLNode, Integer> map = new HashMap<>();
         LLNode temp = head;
 
+        int i = 1;
         while (temp != null) {
             if (map.containsKey(temp)) {
-                return true;
+                return i - map.get(temp);
             }
 
-            map.put(temp, 1);
+            map.put(temp, i++);
             temp = temp.next;
         }
-        return false;
+        return 0;
     }
 
     // Optimal Approach(ortoise and Hare Algorithm) - TC -> O(N), SC -> O(1)
     // If there is a loop in LL, then there must be a point where slow and fast
     // pointers will collide
-    public boolean hasCycleOptimal(LLNode head) {
+    public int cycleLengthOptimal(LLNode head) {
         LLNode slow = head;
         LLNode fast = head;
         while (fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
-            if (slow == fast)
-                return true;
+            if (slow == fast) {
+                int cnt = 1;
+                fast = fast.next;
+                while (slow != fast) {
+                    cnt++;
+                    fast = fast.next;
+                }
+
+                return cnt;
+            }
         }
 
-        return false;
+        return 0;
     }
 }
