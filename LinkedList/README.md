@@ -1,4 +1,4 @@
-# 🔗 Linked List - DSA Package
+# 🔗 Linked List - DSA Practice
 
 This repository contains comprehensive Java implementations of all major **Linked List** types and operations.
 
