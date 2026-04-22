@@ -22,6 +22,7 @@ public class NQueens {
         return result;
     }
 
+    /* Approach 1: Using backtracking to place queens column by column */
     public static void solve(int col, char[][] board, List<List<String>> result){
         if(col == board.length){
             result.add(construct(board));
