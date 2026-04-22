@@ -19,10 +19,17 @@ public class NQueens {
         }
         List<List<String>> result = new ArrayList<>();
         solve(0, board, result);
+
+        List<List<String>> result2 = new ArrayList<>();
+        int leftRow[] = new int[n];
+        int lowerDiagnol[] = new int[2*n - 1];
+        int upperDiagnol[] = new int[2*n - 1];
+        solve2(0, board, result2, leftRow, lowerDiagnol, upperDiagnol);
+
         return result;
     }
 
-    /* Approach 1: Using backtracking to place queens column by column */
+    // Approach 1: Using backtracking to explore all possible placements of queens on the board, checking for conflicts with previously placed queens. The time complexity is O(n!) in the worst case, as there are n choices for the first queen, n-1 for the second, and so on. The space complexity is O(n) for the recursive call stack and O(n^2) for the board representation.
     public static void solve(int col, char[][] board, List<List<String>> result){
         if(col == board.length){
             result.add(construct(board));
@@ -34,6 +41,28 @@ public class NQueens {
                 board[row][col] = 'Q';
                 solve(col + 1, board, result);
                 board[row][col] = '.';
+            }
+        }
+    }
+
+    // Approach 2: Using additional arrays to keep track of the rows and diagonals that are already occupied by queens, which allows for O(1) time complexity for checking if a queen can be placed in a given position. The space complexity is O(n) for the leftRow array and O(2*n - 1) for the lowerDiagnol and upperDiagnol arrays, resulting in O(n) space complexity overall.
+    public static void solve2(int col, char[][] board, List<List<String>> result, int leftRow[], int lowerDiagnol[], int upperDiagnol[]){
+        if(col == board.length){
+            result.add(construct(board));
+            return;
+        }
+
+        for(int row=0; row<board.length; row++){
+            if(leftRow[row] == 0 && lowerDiagnol[row + col] == 0 && upperDiagnol[(board.length - 1) + (col - row)] == 0){
+                board[row][col] = 'Q';
+                leftRow[row] = 1;
+                lowerDiagnol[row + col] = 1;
+                upperDiagnol[(board.length - 1) + (col - row)] = 1;
+                solve2(col + 1, board, result, leftRow, lowerDiagnol, upperDiagnol);
+                board[row][col] = '.';
+                leftRow[row] = 0;
+                lowerDiagnol[row + col] = 0;
+                upperDiagnol[(board.length - 1) + (col - row)] = 0;
             }
         }
     }
