@@ -10,7 +10,8 @@ public class PrintAllPermutations {
         boolean freq[] = new boolean[nums.length];
         List<List<Integer>> result = new ArrayList<>();
         backtrackApproach1(nums, freq, new ArrayList<>(), result);
-        backtrackApproach2(0, nums, new ArrayList<>(), result);
+        List<List<Integer>> result2 = new ArrayList<>();
+        backtrackApproach2(0, nums, new ArrayList<>(), result2);
         return result;
     }
 
