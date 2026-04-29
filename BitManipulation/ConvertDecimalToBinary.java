@@ -27,8 +27,8 @@ public class ConvertDecimalToBinary {
         if(n == 0) return "0";
         StringBuilder res = new StringBuilder();
         while (n > 0){
-            res.append((n & 1));
-            n = n >> 1;
+            res.append((n & 1)); // Get the least significant bit (LSB) of n (0 or 1)
+            n = n >> 1; // Right shift n by 1 bit (equivalent to dividing n by 2 and discarding the remainder)
         }
         
         return res.reverse().toString();
