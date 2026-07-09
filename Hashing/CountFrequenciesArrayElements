@@ -1,0 +1,95 @@
+public class CountFrequenciesArrayElements {
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 2, 3, 3, 3, 4, 4, 4, 4};
+        countFrequencies(arr);
+    }
+
+    /**
+     * Brute Force Approach
+     * This method counts the frequency of each element in the given array and returns a list of lists,
+     * where each inner list contains the element and its corresponding frequency.
+     *
+     * @param nums The input array of integers.
+     * @return A list of lists containing each unique element and its frequency.
+     * Time Complexity: O(n^2) - The outer loop runs n times and the inner loop runs up to n times in the worst case.
+     * Space Complexity: O(n) - The visited array and the result list both take up space proportional to the input size.
+     */
+    public List<List<Integer>> countFrequencies(int[] nums) {
+        boolean visited[] = new boolean[nums.length];
+        List<List<Integer>> result = new ArrayList<>();
+
+        for(int i=0; i<nums.length; i++){
+            if(visited[i]) continue;
+            
+            int count = 1;
+            for(int j=i+1; j<nums.length; j++){
+                if(nums[j] == nums[i]){
+                    count++;
+                    visited[j] = true;
+                }
+            }
+
+            result.add(Arrays.asList(nums[i], count));
+        }
+        return result;
+    }
+
+    /**
+     * Better Approach
+     * This method counts the frequency of each element in the given array using a frequency array.
+     * It returns a list of lists, where each inner list contains the element and its corresponding frequency.
+     *
+     * @param nums The input array of integers.
+     * @return A list of lists containing each unique element and its frequency.
+     * Time Complexity: O(n + max) - The method iterates through the input array and the frequency array once.
+     * Space Complexity: O(max) - The frequency array takes up space proportional to the maximum value in the input array.
+     */
+    public List<List<Integer>> countFrequenciesUsingFrequencyArray(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        int max = nums[0];
+
+        for(int i=1; i<nums.length; i++){
+            if(nums[i] > max) max = nums[i];
+        }
+
+        int freq[] = new int[max+1];
+
+        for(int i=0; i<nums.length; i++){
+            freq[nums[i]]++;
+        }
+
+        for(int i=0; i<freq.length; i++){
+            if(freq[i] == 0) continue;
+            result.add(Arrays.asList(i, freq[i]));
+        }
+
+        return result;    
+
+    }
+
+    /**
+     * Optimal Approach
+     * This method counts the frequency of each element in the given array using a HashMap.
+     * It returns a list of lists, where each inner list contains the element and its corresponding frequency.
+     *
+     * @param nums The input array of integers.
+     * @return A list of lists containing each unique element and its frequency.
+     * Time Complexity: O(n) - The method iterates through the input array once.
+     * Space Complexity: O(n) - The HashMap takes up space proportional to the number of unique elements in the input array.
+     */
+    public List<List<Integer>> countFrequencies(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for(int i=0; i<nums.length; i++){
+            map.put(nums[i], map.getOrDefault(nums[i], 0)+1);
+        }
+
+        for(Map.Entry<Integer, Integer> entry : map.entrySet()){
+            List<Integer> pair = Arrays.asList(entry.getKey(), entry.getValue());
+            result.add(pair);
+        }
+
+        return result;
+    }
+}
