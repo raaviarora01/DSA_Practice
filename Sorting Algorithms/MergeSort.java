@@ -1,7 +1,12 @@
+/* Merge Sort Algorithm */
+
 import java.util.ArrayList;
 
 public class MergeSort {
-  void mergeSort(int arr[], int low, int high){
+  /** Sorts the array using the merge sort algorithm */
+  /* Time Complexity: O(n log n), Space Complexity: O(n) + recursion stack (O(log n)) */
+  /* Use when we need a stable, efficient sorting algorithm and space is not a constraint */
+  public void mergeSort(int arr[], int low, int high){
     if(low >= high) return;
     int mid = (low + high)/2;
     mergeSort(arr, low, mid);
@@ -9,6 +14,8 @@ public class MergeSort {
     merge(arr, low, mid, high);
   }
 
+  /** Merges two sorted subarrays into a single sorted array */
+  /* Time Complexity: O(n), Space Complexity: O(n) */
   public static void merge(int arr[], int low, int mid, int high){
     ArrayList<Integer> temp = new ArrayList<>();
     int left = low;
