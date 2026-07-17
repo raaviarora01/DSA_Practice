@@ -1,5 +1,10 @@
+/* Selection Sort Algorithm */
+
+/* Time Complexity: O(n^2), Space Complexity: O(1) */
+/* Best when the array is small, space efficient, and in-place */
+
 public class SelectionSort {
-  void selectionSort(int arr[]){
+  public int[] selectionSort(int arr[]){
     int n = arr.length;
     for(int i=0; i<=n-2; i++){
       int min = i;
@@ -14,5 +19,7 @@ public class SelectionSort {
         arr[min] = temp;
       }
     }
+
+    return arr;
   }
 }

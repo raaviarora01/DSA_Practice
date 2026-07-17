@@ -1,6 +1,7 @@
 /* Bubble Sort Algorithm */
 
 /* Time Complexity: O(n^2), Space Complexity: O(1) */
+/* Best when the array is nearly sorted, space efficient, and in-place */
 public class BubbleSort {
   public int[] bubbleSort(int arr[]){
     int n = arr.length;
