@@ -1,5 +1,12 @@
+/* Insertion Sort Algorithm */
+
+/* Time Complexity: O(n^2), Space Complexity: O(1) */
+/** Best when the array is nearly sorted, space efficient, stable, and in-place.
+ *Use it when there is a continuous flow of elements to be inserted,
+ *and we want to keep them sorted and maintain their relative order */
+
 public class InsertionSort{
-  void insertionSort(int[] arr){
+  public int[] insertionSort(int[] arr){
     int n = arr.length;
     for(int i=1; i<n; i++){
       int j=i;
@@ -10,5 +17,7 @@ public class InsertionSort{
         j--;
       }
     }
+
+    return arr;
   }
 }
