@@ -1,5 +1,10 @@
+/* Quick Sort Algorithm */
+
 public class QuickSort {
-  void quickSort(int arr[], int low, int high) {
+  /** Sorts the array using the quick sort algorithm */
+  /* Time Complexity: O(n log n) best and average, O(n^2) worst case, Space Complexity: O(log n) - recursion stack */
+  /* Use when we need a fast, in-place sorting algorithm and space is a concern, but it is not stable */
+  public void quickSort(int arr[], int low, int high) {
     if (low >= high)
       return;
 
@@ -8,6 +13,8 @@ public class QuickSort {
     quickSort(arr, pivot + 1, high);
   }
 
+  /** Partitions the array around a pivot element and returns the index of the pivot */
+  /* Time Complexity: O(n), Space Complexity: O(1) */
   private int partition(int[] arr, int low, int high) {
     int pivot = low;
     int i = low;
