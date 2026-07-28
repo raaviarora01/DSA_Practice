@@ -1,20 +1,20 @@
-/* Given an integer array nums, rotate the array to the right by k steps, where k is non-negative. */
+/* Given an integer array nums and a non-negative integer k, rotate the array to the left by k steps. */
 
-public class RightRotateArrayByKPlaces{
+public class LeftRotateArrayByKPlaces {
 
-    /* Brute Force Approach: Rotates the array to the right by k steps
-    * Time Complexity: O(n*k) - The method iterates through the input array k times, and each iteration takes O(n) time.
+    /* Brute Force Approach: Rotates the array to the left by k steps
+     * Time Complexity: O(n*k) - The method iterates through the input array k times, and each iteration takes O(n) time.
     * Space Complexity: O(1) - The method uses a constant amount of space for variables.
     */
-    public void rotateBruteForce(int[] nums, int k) {
+    public void rotateBruteForce Approach(int[] nums, int k) {
         int n = nums.length;
         k = k%n;
         while(k > 0){
-            int temp = nums[n-1];
-            for(int i = n-2; i>=0; i--){
-                nums[i+1] = nums[i];
+            int temp = nums[0];
+            for(int i = 0; i < n - 1; i++) {
+                nums[i] = nums[i + 1];
             }
-            nums[0] = temp;
+            nums[n-1] = temp;
             k--;
         }
     }
@@ -23,7 +23,7 @@ public class RightRotateArrayByKPlaces{
     * Time Complexity: O(n) - The method iterates through the input array once.
     * Space Complexity: O(k) - The method uses additional space proportional to k.
     */
-    public void rotateBetter(int[] nums, int k) {
+    public void rotate(int[] nums, int k) {
         int n = nums.length;
         k = k%n;
         
