@@ -43,4 +43,27 @@ public class RightRotateArrayByKPlaces{
             nums[i] = temp[i];
         }
     }
+
+
+    /* Optimal Approach: Rotates the array to the right by k steps using reversal
+     * Time Complexity: O(n) - The method iterates through the input array a constant number of times.
+     * Space Complexity: O(1) - The method uses a constant amount of space for variables.
+     */
+    public void rotateOptimal(int[] nums, int k) {
+        int n = nums.length;
+        k = k%n;
+        reverse(nums, 0, n-k-1);
+        reverse(nums, n-k, n-1);
+        reverse(nums, 0, n-1);
+    }
+
+    public static void reverse(int nums[], int left, int right){
+        while(left < right){
+            int temp = nums[left];
+            nums[left] = nums[right];
+            nums[right] = temp;
+            left++;
+            right--;
+        }
+    }
 }
