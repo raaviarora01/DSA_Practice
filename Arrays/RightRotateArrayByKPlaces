@@ -1,0 +1,21 @@
+/* Given an integer array nums, rotate the array to the right by k steps, where k is non-negative. */
+
+public class RightRotateArrayByKPlaces{
+
+    /* Rotates the array to the right by k steps
+    * Time Complexity: O(n*k) - The method iterates through the input array k times, and each iteration takes O(n) time.
+    * Space Complexity: O(1) - The method uses a constant amount of space for variables.
+    */
+    public void rotate(int[] nums, int k) {
+        int n = nums.length;
+        k = k%n;
+        while(k > 0){
+            int temp = nums[n-1];
+            for(int i = n-2; i>=0; i--){
+                nums[i+1] = nums[i];
+            }
+            nums[0] = temp;
+            k--;
+        }
+    }
+}
