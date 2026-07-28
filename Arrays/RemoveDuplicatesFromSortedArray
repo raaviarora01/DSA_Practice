@@ -9,6 +9,8 @@ public class RemoveDuplicatesFromSortedArray {
 
     /* Removes duplicates from a sorted array using a HashSet and returns the new length of the array.
         * This method uses a LinkedHashSet to maintain the order of elements while removing duplicates.
+     * Better than temporary array approach because it will work for unsorted arrays as well.
+     * Drawback: It uses extra space for the HashSet, which is not optimal for large arrays.
      * Time Complexity: O(n) - The method iterates through the input array once.
      * Space Complexity: O(n) - The method uses additional space for the HashSet.
      */
@@ -31,6 +33,7 @@ public class RemoveDuplicatesFromSortedArray {
     }
 
     /* Removes duplicates from a sorted array using extra space and returns the new length of the array.
+     * Better than brute force approach because it uses minimal overhead.
      * Time Complexity: O(n) - The method iterates through the input array once.
      * Space Complexity: O(n) - The method uses additional space for the temporary array.
      */
@@ -59,17 +62,16 @@ public class RemoveDuplicatesFromSortedArray {
      * Space Complexity: O(1) - The method uses a constant amount of space for variables.
      */
     public int removeDuplicates(int[] nums) {
-        if (nums.length == 0) return 0;
+        if(nums.length == 0) return 0;
 
-        int uniqueCount = 1; // Start with the first element as unique
-
-        for (int i = 1; i < nums.length; i++) {
-            if (nums[i] != nums[i - 1]) {
-                nums[uniqueCount] = nums[i];
-                uniqueCount++;
+        int uniqueCount=0;
+        for(int i=0; i<nums.length-1; i++){
+            if(nums[i] != nums[i+1]){
+                nums[uniqueCount++] = nums[i];
             }
         }
 
+        nums[uniqueCount++] = nums[nums.length - 1];
         return uniqueCount;
     }
 }
