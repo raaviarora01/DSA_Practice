@@ -2,7 +2,7 @@
 
 public class RightRotateArrayByKPlaces{
 
-    /* Rotates the array to the right by k steps
+    /* Brute Force Approach: Rotates the array to the right by k steps
     * Time Complexity: O(n*k) - The method iterates through the input array k times, and each iteration takes O(n) time.
     * Space Complexity: O(1) - The method uses a constant amount of space for variables.
     */
