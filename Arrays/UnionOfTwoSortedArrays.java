@@ -7,14 +7,42 @@ The union of two arrays is an array where all values are distinct and are presen
 package Arrays;
 
 import java.util.Arrays;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class UnionOfTwoSortedArrays {
+
+    /** Brute Force Approach: Uses a TreeSet to store unique elements from both arrays and then converts it to an array.
+     * Used TreeSet instead of HashSet to maintain the order of elements in ascending order.
+     * Time Complexity: O((n + m) log(n + m)) - The method iterates through both input arrays and adds elements to a TreeSet, which takes logarithmic time for each insertion.
+     * Space Complexity: O(n + m) - The method uses additional space for the TreeSet and the result array.
+     */
+    public int[] unionArray(int[] nums1, int[] nums2) {
+        Set<Integer> unique = new TreeSet<>();
+
+        for(int num : nums1){
+            unique.add(num);
+        }
+
+        for(int num : nums2){
+            unique.add(num);
+        }
+
+        int arr[] = new int[unique.size()];
+        int i=0;
+
+        for(int num : unique){
+            arr[i++] = num;
+        }
+
+        return arr;
+    }
 
     /** Optimal Approach: Uses two pointers to traverse both sorted arrays and build the union array while avoiding duplicates.
      * Time Complexity: O(n + m) - The method iterates through both input arrays once.
      * Space Complexity: O(n + m) - The method uses additional space for the result array.
      */
-    public int[] unionOfTwoSortedArrays(int[] nums1, int[] nums2) {
+    public int[] unionOfTwoSortedArraysOptimal(int[] nums1, int[] nums2) {
         int n = nums1.length;
         int m = nums2.length;
         int[] result = new int[n + m];
