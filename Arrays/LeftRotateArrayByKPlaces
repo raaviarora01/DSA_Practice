@@ -1,5 +1,7 @@
 /* Given an integer array nums and a non-negative integer k, rotate the array to the left by k steps. */
 
+package Arrays;
+
 public class LeftRotateArrayByKPlaces {
 
     /* Brute Force Approach: Rotates the array to the left by k steps

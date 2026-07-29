@@ -1,5 +1,7 @@
 /* Given an array of integers nums, return the second-largest element in the array. If the second-largest element does not exist, return -1. */
 
+package Arrays;
+
 public class SecondLargestNumber {
 
     /** Returns the second-largest element in the array. If the second-largest element does not exist, returns -1.

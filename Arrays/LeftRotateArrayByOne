@@ -1,5 +1,7 @@
 /* Given an integer array nums, rotate the array to the left by one. */
 
+package Arrays;
+
 public class LeftRotateArrayByOne {
 
     /** Rotates the given array to the left by one position.

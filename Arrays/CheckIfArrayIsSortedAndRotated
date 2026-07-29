@@ -4,6 +4,8 @@ There may be duplicates in the original array.
 
 Note: An array A rotated by x positions results in an array B of the same length such that B[i] == A[(i+x) % A.length] for every valid index i. */
 
+package Arrays;
+
 public class CheckIfArrayIsSortedAndRotated{
 
     /* Checks for inversion points. If there is more than one inversion point, the array is not sorted and rotated.

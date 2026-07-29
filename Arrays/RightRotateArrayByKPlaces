@@ -1,5 +1,7 @@
 /* Given an integer array nums, rotate the array to the right by k steps, where k is non-negative. */
 
+package Arrays;
+
 public class RightRotateArrayByKPlaces{
 
     /* Brute Force Approach: Rotates the array to the right by k steps
