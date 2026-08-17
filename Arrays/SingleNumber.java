@@ -40,4 +40,26 @@ public class SingleNumber {
 
         return -1;
     }
+
+    // Better Approach(Only Applicaple if the array contains only 0 or positive integers): Uses a Hash Array to count the occurrences of each number and finds the single number.
+    // Time Complexity: O(n + max) - The method iterates over input array twice and over hash array once which is of length max
+    // Space Complexity: O(max) - The method uses a hash array to store the occurrences of each number, which takes max length space in the best and worst case.
+    public int singleNumber(int[] nums) {
+        int max = nums[0];
+        for(int num : nums){
+            if(num > max) max = num;
+        }
+
+        int[] hashArr = new int[max+1];
+
+        for(int num : nums){
+            hashArr[num] += 1;
+        }
+
+        for(int i=0; i<hashArr.length; i++){
+            if(hashArr[i] == 1) return i;
+        }
+
+        return -1;
+    }
 }
