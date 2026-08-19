@@ -54,4 +54,28 @@ public class LongestSubarrayWithSumKPositives {
 
         return maxLength;
     }
+
+    // Optimal Approach: Use two pointers to find the longest sub-array that sums to k. The left pointer starts at the beginning of the array and the right pointer moves to the right, adding elements to the sum. If the sum exceeds k, move the left pointer to the right until the sum is less than or equal to k.
+    // Time Complexity: O(n) - The method iterates over input array once.
+    // Space Complexity: O(1) - The method uses a constant amount of space for variables to store the result.
+    public int longestSubarrayWithSumKOptimalApproach(int[] nums, int k) {
+        int maxLength = 0;
+        int left = 0;
+        int sum = 0;
+
+        for(int right=0; right<nums.length; right++){
+            sum += nums[right];
+
+            while(sum > k && left <= right){
+                sum -= nums[left];
+                left++;
+            }
+
+            if(sum == k){
+                maxLength = Math.max(maxLength, right - left + 1);
+            }
+        }
+
+        return maxLength;
+    }
 }
