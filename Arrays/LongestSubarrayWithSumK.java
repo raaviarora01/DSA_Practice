@@ -27,7 +27,7 @@ public class LongestSubarrayWithSumK {
         return maxLength;
     }
 
-    // Better Approach: Use HashMap to store the sum of elements from the start of the array to the current index. If the difference between the current sum and k exists in the HashMap, it means there is a sub-array that sums to k.
+    // Optimal Approach: Use HashMap to store the sum of elements from the start of the array to the current index. If the difference between the current sum and k exists in the HashMap, it means there is a sub-array that sums to k.
     // Time Complexity: O(n) - The method iterates over input array once.
     // Space Complexity: O(n) - The method uses a HashMap to store the sum of elements from the start of the array to the current index, which can take up to n space in the worst case.
     public int longestSubarrayWithSumKBetterApproach(int[] nums, int k) {
