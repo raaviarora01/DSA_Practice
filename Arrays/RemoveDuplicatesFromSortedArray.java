@@ -6,6 +6,9 @@ The first k elements of nums should contain the unique numbers in sorted order. 
 
 package Arrays;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 public class RemoveDuplicatesFromSortedArray {
 
 
