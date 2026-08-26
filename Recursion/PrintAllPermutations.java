@@ -6,48 +6,63 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PrintAllPermutations {
-    public List<List<Integer>> permute(int[] nums) {
-        boolean freq[] = new boolean[nums.length];
+
+    // Brute Force approach: Use a frequency array to keep track of the elements that have been used in the current permutation. When the current permutation is complete, add it to the result list.
+    // Time Complexity: O(n*n!) - There are n! permutations and it takes O(n) time to copy each permutation to the result list.
+    // Space Complexity: O(n+n) - The frequency array takes O(n) space, and the recursion stack takes O(n) space.
+    public List<List<Integer>> permuteApproach1(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
-        backtrackApproach1(nums, freq, new ArrayList<>(), result);
-        List<List<Integer>> result2 = new ArrayList<>();
-        backtrackApproach2(0, nums, new ArrayList<>(), result2);
+        printPermutations(nums, new ArrayList<>(), result, new boolean[nums.length]);
+ 
         return result;
     }
-
-    // Approach 1: Using a frequency array to keep track of which elements have been included in the current permutation, requires O(n) space for the frequency array and O(n) space for the current permutation list, resulting in O(n) space complexity.
-    public static void backtrackApproach1(int[] nums, boolean freq[], List<Integer> ans, List<List<Integer>> result){
-        if(ans.size() == nums.length){
-            result.add(new ArrayList<>(ans));
+ 
+ 
+    public static void printPermutations(int[] nums, List<Integer> ds, List<List<Integer>> ans, boolean[] freq){
+        if(ds.size() == nums.length){
+            ans.add(new ArrayList<>(ds));
+            return;
         }
-
+ 
         for(int i=0; i<nums.length; i++){
             if(!freq[i]){
                 freq[i] = true;
-                ans.add(nums[i]);
-                backtrackApproach1(nums,  freq, ans, result);
-                ans.remove(ans.size() - 1);
+                ds.add(nums[i]);
+                printPermutations(nums, ds, ans, freq);
+                ds.remove(ds.size()-1);
                 freq[i] = false;
             }
         }
     }
-
-    // Approach 2: Using swapping to generate permutations in-place, does not require additional space for a frequency array, but it modifies the input array during the backtracking process. The space complexity is O(n) due to the recursive call stack and the current permutation list.
-    public static void backtrackApproach2(int ind, int[] nums, List<Integer> ans, List<List<Integer>> result){
+ 
+    // Optimal approach: Use swapping to generate permutations. Swap the current element with the element at the current index, and recursively generate permutations for the next index. After returning from the recursive call, swap back to restore the original array.
+    // Time Complexity: O(n*n!) - There are n! permutations and it takes O(n) time to copy each permutation to the result list.
+    // Space Complexity: O(n) - The recursion stack takes O(n) space.
+    public List<List<Integer>> permuteApproach2(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        printPermutations(0, nums, result);
+ 
+        return result;
+    }
+ 
+    public static void printPermutations(int ind, int[] nums, List<List<Integer>> ans){
         if(ind == nums.length){
-            result.add(new ArrayList<>(ans));
+            List<Integer> ds = new ArrayList<>();
+            for(int num : nums){
+                ds.add(num);
+            }
+            ans.add(new ArrayList<>(ds));
+            return;
         }
-
+ 
         for(int i=ind; i<nums.length; i++){
-            swap(ind, i, nums);
-            ans.add(nums[ind]);
-            backtrackApproach2(ind+1, nums, ans, result);
-            ans.remove(ans.size() - 1);
-            swap(ind, i, nums);
+            swap(nums, ind, i);
+            printPermutations(ind+1, nums, ans);
+            swap(nums, ind, i);
         }
     }
-
-    public static void swap(int i, int j, int nums[]){
+ 
+    public static void swap(int[] nums, int i, int j){
         int temp = nums[i];
         nums[i] = nums[j];
         nums[j] = temp;
