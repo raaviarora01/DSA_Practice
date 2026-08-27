@@ -118,6 +118,43 @@ public class NextPermutation{
         }
     }
 
+    // Optimal Approach: Find the next permutation using the following steps:
+    // 1. Traverse the array from the end and find the first element which is smaller
+    // than its next element. Let's call this element as break point.
+    // 2. If no such element is found, then the array is in descending order
+    // and we need to reverse the array to get the next permutation.
+    // 3. If such an element is found, then traverse the array from the end and find the first element which is greater than the break point.
+    // 4. Swap the break point and the element found in step 3.
+    // 5. Reverse the array from the break point + 1 to the end of the array.
+    // Time Complexity: O(n) where n is the length of the given array.
+    // Space Complexity: O(1) as we are not using any extra space.
+    public void nextPermutationOptimal(int[] nums) {
+        int n = nums.length;
+        int break_pt = -1;
+
+        for(int i=n-2; i>=0; i--){
+            if(nums[i] < nums[i+1]){
+                break_pt = i;
+                break;
+            }
+        }
+
+        if(break_pt == -1){
+            reverse(nums, 0, n-1);
+            return;
+        }
+
+        for(int i=n-1; i>break_pt; i--){
+            if(nums[i] > nums[break_pt]){
+                swap(nums, break_pt, i);
+                break;
+            }
+        }
+
+        reverse(nums, break_pt+1, n-1);
+    }
+
+    /* Helper methods */
     public static void generatePermutations(int ind, int[] nums, Set<List<Integer>> ans){
         if(ind == nums.length){
             List<Integer> ds = new ArrayList<>();
@@ -149,6 +186,14 @@ public class NextPermutation{
             swap(nums, i, ind);
             generatePermutations(ind+1, nums, ans);
             swap(nums, i, ind);
+        }
+    }
+
+    private void reverse(int[] arr, int start, int end) {
+        while (start < end) {
+            swap(arr, start, end);
+            start++;
+            end--;
         }
     }
 
