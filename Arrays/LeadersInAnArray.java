@@ -33,7 +33,35 @@ public class LeadersInAnArray {
             }
         }
 
-        // Step 5: Convert the list of leaders to an array and return it
         return leaders;
     }
+
+    // Optimal Approach: Traverse the array from right to left and keep track of the maximum element seen so far. If the current element is greater than the maximum element, it is a leader.
+    // Time Complexity: O(n) where n is the length of the given array. We are traversing the array only once.
+    // Space Complexity: O(n) for storing the leader array, but it's not counted as extra space as we are returning the leader array.
+    public List<Integer> leadersInAnArrayOptimal(int[] nums) {
+        // Step 1: Declare a list to store leaders
+        List<Integer> leaders = new ArrayList<>();
+
+        // Step 2: Initialize the maximum element to the last element of the array
+        int max = nums[nums.length - 1];
+
+        // Step 3: Add the last element to the leader array as it is always a leader
+        leaders.add(max);
+
+        // Step 4: Traverse the array from right to left
+        for(int i=nums.length - 2; i>=0; i--){
+            // Step 5: If the current element is greater than the maximum element, it is a leader
+            if(nums[i] > max){
+                max = nums[i];
+                leaders.add(max);
+            }
+        }
+
+        // Step 6: Reverse the leader array to get the elements in the order they appear in the original array
+        java.util.Collections.reverse(leaders);
+
+        return leaders;
+    }
+
 }
