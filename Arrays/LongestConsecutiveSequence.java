@@ -66,4 +66,36 @@ public class LongestConsecutiveSequence {
 
         return longest;
     }
+
+    // Optimal Approach: Use a HashSet to store the elements of the array. Then for each element, check if it is the start of a sequence. If it is, then count the length of the sequence.
+    // Time Complexity : O(n) where n is the length of the given array. We are traversing the array only once and checking for the next consecutive element in O(1) time using HashSet.
+    // Space Complexity : O(n) for storing the elements of the array in HashSet.
+    public int longestConsecutiveOptimal(int[] nums) {
+        if(nums.length == 0){
+            return 0;
+        }
+
+        java.util.HashSet<Integer> set = new java.util.HashSet<>();
+        for(int num : nums){
+            set.add(num);
+        }
+
+        int longest = 1;
+
+        for(int num : nums){
+            if(!set.contains(num - 1)){
+                int currentNum = num;
+                int count = 1;
+
+                while(set.contains(currentNum + 1)){
+                    currentNum++;
+                    count++;
+                }
+
+                longest = Math.max(longest, count);
+            }
+        }
+
+        return longest;
+    }
 }
