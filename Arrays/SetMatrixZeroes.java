@@ -65,4 +65,49 @@ public class SetMatrixZeroes {
             }
         }
     }
+
+    // Optimal Approach: Use the first row and first column of the matrix to keep track of the rows and columns that need to be set to 0's.
+    // Time Complexity: O(m * n) where m is the number of rows and n is the number of columns in the given matrix. We are traversing the matrix twice, once to find the rows and columns that need to be set to 0's and once to set them.
+    // Space Complexity: O(1) as we are not using any extra space.
+    public void setZeroesOptimal(int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int col0 = 1;
+
+        for(int i=0; i<m; i++){
+            for(int j=0; j<n; j++){
+                if(matrix[i][j] == 0){
+                    matrix[i][0] = 0;
+
+                    if(j != 0){
+                        matrix[0][j] = 0;
+                    } else {
+                        col0 = 0;
+                    }
+                }
+            }
+        }
+
+        for(int i=1; i<m; i++){
+            for(int j=1; j<n; j++){
+                if(matrix[i][j] != 0){
+                    if(matrix[i][0] == 0 || matrix[0][j] == 0){
+                        matrix[i][j] = 0;
+                    }
+                }
+            }
+        }
+
+        if(matrix[0][0] == 0){
+            for(int j=0; j<n; j++){
+                matrix[0][j] = 0;
+            }
+        }
+
+        if(col0 == 0){
+            for(int i=0; i<m; i++){
+                matrix[i][0] = 0;
+            }
+        }
+    }
 }
