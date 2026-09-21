@@ -9,6 +9,25 @@ import java.util.Set;
 public class IntersectionOfTwoArrays {
     
     // Brute Force Approach: Iterate through the first array and check if each element exists in the second array. If it does, add it to a set to ensure uniqueness.
+    // Time Complexity: O(n * m) - The method iterates over the first array and for each element, it iterates over the second array to check for existence.
+    // Space Complexity: O(k) - The method uses a HashSet to store the unique elements of the intersection, where k is the number of unique elements in the intersection.
+    public int[] intersection(int[] nums1, int[] nums2) {
+        Set<Integer> set = new HashSet<>();
+        
+        for(int num1 : nums1){
+            for(int num2 : nums2){
+                if(num1 == num2){
+                    set.add(num1);
+                }
+            }
+        }
+
+        int[] arr = set.stream().mapToInt(Integer::intValue).toArray();
+
+        return arr;
+    }
+
+    // Better Approach 1: Iterate through the first array and check if each element exists in the second array. If it does, add it to a set to ensure uniqueness.
     // Time Complexity: O(n log n + m log m)
     // Space Complexity: O(k) - The method uses a HashSet to store the unique elements of the intersection, where k is the number of unique elements in the intersection.
     // Complete Analysis breakdown:
@@ -25,7 +44,7 @@ public class IntersectionOfTwoArrays {
     Therefore, auxiliary space can be stated more precisely as O(k + log n + log m), though it is commonly reported as O(k) in standard DSA analysis.
     The returned array requires O(k) output space. If the original input arrays are also counted, the total space complexity is O(n + m).
     */
-    public int[] intersection(int[] nums1, int[] nums2) {
+    public int[] intersectionBetterApproach1(int[] nums1, int[] nums2) {
         Set<Integer> set = new HashSet<>();
         Arrays.sort(nums1);
         Arrays.sort(nums2);
