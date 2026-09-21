@@ -68,4 +68,29 @@ public class IntersectionOfTwoArrays {
 
         return arr;
     }
+
+    // Better Approach 2: Use a HashSet to store the elements of the first array. Then iterate through the second array and check if each element exists in the HashSet. If it does, add it to another HashSet to ensure uniqueness.
+    // Time Complexity: O(n + m + k) = O(n + m) - The method iterates over both input arrays once.
+    // Space Complexity: O(min(n,m) + k) - The method uses a HashSet to store the elements of the first array and another HashSet to store the unique elements of the intersection, where k is the number of unique elements in the intersection.
+    public int[] intersectionBetterApproach2(int[] nums1, int[] nums2) {
+        // Ensure that we always iterate over the smaller array to minimize space usage
+        if (nums1.length > nums2.length) {
+            return intersection(nums2, nums1);
+        }
+
+        Set<Integer> lookup = new HashSet<>();
+        Set<Integer> result = new HashSet<>();
+
+        for(int num : nums1){
+            lookup.add(num);
+        }
+
+        for(int num : nums2){
+            if(lookup.contains(num)){
+                result.add(num);
+            }
+        }
+
+        return result.stream().mapToInt(Integer::intValue).toArray();
+    }
 }
