@@ -93,4 +93,36 @@ public class IntersectionOfTwoArrays {
 
         return result.stream().mapToInt(Integer::intValue).toArray();
     }
+
+
+    // Better Approach 3: Sort both arrays and use two pointers to find the intersection. This approach avoids using extra space for a HashSet.
+    // Time Complexity: O(n log n + m log m) - The method sorts both input arrays and then iterates over them once.
+    // Space Complexity(Auxiliary): O(k) - The method uses a temporary array to store the unique elements of the intersection, where k is the number of unique elements in the intersection.
+    public int[] intersectionBetterApproach3(int[] nums1, int[] nums2) {
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        int n = nums1.length;
+        int m = nums2.length;
+
+        int temp[] = new int[Math.min(n,m)];
+
+        int i=0, j=0, k=0;
+
+        while(i < n && j < m){
+            if(nums1[i] < nums2[j]){
+                i++;
+            } else if(nums2[j] < nums1[i]){
+                j++;
+            } else{
+                if(k == 0 || temp[k-1] != nums1[i]){
+                    temp[k++] = nums1[i];
+                }
+
+                i++;
+                j++;
+            }
+        }
+
+        return Arrays.copyOf(temp, k);
+    }
 }
