@@ -16,7 +16,7 @@ public class ProductOfArrayExceptSelf {
         for(int i=0; i<nums.length; i++){
             int product = 1;
             for(int j=0; j<nums.length; j++){
-                if(!(j == i)){
+                if(i != j){
                     product = product * nums[j];
                 }
             }
@@ -25,5 +25,32 @@ public class ProductOfArrayExceptSelf {
         }
 
         return products;
+    }
+
+    // Better Approach: Use two arrays to store the prefix and suffix products. The prefix product at index i is the product of all elements before index i, and the suffix product at index i is the product of all elements after index i. The final result for each index is the product of the prefix and suffix products.
+    // Time Complexity: O(n) - The method iterates over input array three times.
+    // Space Complexity: O(n) - The method uses two additional arrays to store the prefix and suffix products.
+    public int[] productExceptSelfBetterApproach(int[] nums) {
+        int n = nums.length;
+        int[] prefix = new int[n];
+        int[] suffix = new int[n];
+        int[] ans = new int[n];
+
+        prefix[0] = 1;
+        suffix[n-1] = 1;
+
+        for(int i=1; i<n; i++){
+            prefix[i] = prefix[i-1] * nums[i-1];
+        }
+
+        for(int i=n-2; i>=0; i--){
+            suffix[i] = suffix[i+1] * nums[i+1];
+        }
+
+        for(int i=0; i<n; i++){
+            ans[i] = prefix[i] * suffix[i];
+        }
+
+        return ans;
     }
 }
