@@ -3,6 +3,7 @@
 package Arrays;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MergeIntervals {
@@ -40,6 +41,27 @@ public class MergeIntervals {
                     break;
                 }
             }
+        }
+
+        return list.toArray(new int[list.size()][]);
+    }
+
+    // Better Approach: Sort the intervals based on the start time and then iterate through the sorted intervals. If the current interval overlaps with the previous interval, merge them. Otherwise, add the current interval to the result list.
+    // Time Complexity: O(nlogn) - The method sorts the input array, which takes O(nlogn) time, and then iterates over the sorted array once.
+    // Space Complexity: O(n) - The method uses a list to store the merged intervals
+    public int[][] mergeBetterApproach(int[][] intervals) {
+        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
+        List<int[]> list = new ArrayList<>();
+
+        for(int[] interval : intervals){
+            if(list.isEmpty() || list.get(list.size() - 1)[1] < interval[0]){
+                list.add(interval);
+            } else {
+                list.get(list.size() - 1)[1] = Math.max(
+                    list.get(list.size() - 1)[1], interval[1]
+                    );
+            }
+            
         }
 
         return list.toArray(new int[list.size()][]);
