@@ -47,5 +47,6 @@ public class ArrayListImplementation {
 
         // print the final size
         System.out.println("List size: " + technologies.size());
+
     }
 }
