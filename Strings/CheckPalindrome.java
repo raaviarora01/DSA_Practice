@@ -26,4 +26,32 @@ public class CheckPalindrome {
 
         return reversed.equals(cleaned);
     }
+
+    // Optimal Approach: Use two pointers to check for palindrome without creating new strings.
+    // Time Complexity: O(n) since we are iterating through the string once.
+    // Space Complexity: O(1) since we are not using any extra space.
+    public boolean isPalindromeOptimal(String s) {
+        int left = 0;
+        int right =  s.length()-1;
+
+        while(left < right){
+
+            while(left < right && !Character.isLetterOrDigit(s.charAt(left))){
+                left++;
+            }
+
+            while(left < right && !Character.isLetterOrDigit(s.charAt(right))){
+                right--;
+            }
+
+            if(Character.toLowerCase(s.charAt(left)) != Character.toLowerCase(s.charAt(right))){
+                return false;
+            }
+
+            left++;
+            right--;
+        }
+
+        return true;
+    }
 }
