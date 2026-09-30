@@ -1,6 +1,10 @@
 package Map;
 
+import List.StackImplementation;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class HashMapImplementation {
@@ -49,5 +53,31 @@ public class HashMapImplementation {
         }
 
         System.out.println("Most frequent occuring character: " + mostFrequent + " -> " + max);
+
+        // Group employees by department
+        List<Employee> employees = new ArrayList<>();
+        employees.add(new Employee("Raavi", "Engineering"));
+        employees.add(new Employee("Aman", "HR"));
+        employees.add(new Employee("Neha", "Engineering"));
+        employees.add(new Employee("Karan", "Finance"));
+        employees.add(new Employee("Riya", "Engineering"));
+
+        Map<String, List<String>> departments = new HashMap<>();
+
+        for(Employee employee : employees){
+            departments.computeIfAbsent(employee.department, k -> new ArrayList<>()).add(employee.name);
+        }
+
+        System.out.println(departments);
+    }
+}
+
+class Employee {
+    String name;
+    String department;
+
+    public Employee(String name, String department){
+        this.name = name;
+        this.department = department;
     }
 }
