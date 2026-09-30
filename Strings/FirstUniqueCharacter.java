@@ -2,6 +2,9 @@
 
 package Strings;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class FirstUniqueCharacter {
 
     // Brute Force Approach: Iterate through each character and check if it appears elsewhere in the string.
@@ -18,6 +21,27 @@ public class FirstUniqueCharacter {
                 }
             }
             if(found) return i;
+        }
+
+        return -1;
+    }
+
+    // Optimal Approach: Use a HashMap to store the frequency of each character, then iterate through the string to find the first character with a frequency of 1.
+    // Time Complexity: O(n) since we are iterating through the string twice.
+    // Space Complexity: O(k) where k is the number of unique characters in the string.
+    public int firstUniqCharOptimal(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+
+        for(int i=0; i<s.length(); i++){
+            char c = s.charAt(i);
+            map.put(c, map.getOrDefault(c, 0)+1);
+        }
+
+        for(int i=0; i<s.length(); i++){
+            char c = s.charAt(i);
+            if(map.get(c) == 1){
+                return i;
+            }
         }
 
         return -1;
