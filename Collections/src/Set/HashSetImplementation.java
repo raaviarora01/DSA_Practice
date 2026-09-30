@@ -40,5 +40,43 @@ public class HashSetImplementation {
         Set<Integer> difference = new HashSet<>(a);
         difference.removeAll(b);
         System.out.println("Difference: " + difference);
+
+        /* Employee manipulation */
+        Employee e1 = new Employee(101, "Raavi");
+        Employee e2 = new Employee(102, "Aman");
+        Employee e3 = new Employee(101, "Raavi");
+
+        Set<Employee> employeeSet = new HashSet<>();
+        employeeSet.add(e1);
+        employeeSet.add(e2);
+        employeeSet.add(e3);
+
+        System.out.println("Set size: " + employeeSet.size());
+    }
+}
+
+class Employee{
+    int id;
+    String name;
+
+    public Employee(int id, String name){
+        this.id = id;
+        this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if(this == obj) return true;
+
+        if(obj == null || getClass() != obj.getClass()) return false;
+
+        Employee other = (Employee) obj;
+
+        return this.id == other.id;
+    }
+
+    @Override
+    public int hashCode(){
+        return Integer.hashCode(id);
     }
 }
