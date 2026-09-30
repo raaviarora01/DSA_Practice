@@ -1,5 +1,9 @@
 package Set;
 
+import com.sun.source.tree.Tree;
+
+import java.util.Comparator;
+import java.util.Set;
 import java.util.TreeSet;
 
 public class TreeSetImplementation {
@@ -31,5 +35,24 @@ public class TreeSetImplementation {
 
         // ceiling of 25
         System.out.println(set.ceiling(25));
+
+        // Sort Employees by ID using Comparator
+        Employee e1 = new Employee(103, "Raavi");
+        Employee e2 = new Employee(101, "Aman");
+        Employee e3 = new Employee(104, "Karan");
+        Employee e4 = new Employee(102, "Neha");
+        Employee e5 = new Employee(102, "John");
+
+        Comparator<Employee> byId = Comparator.comparingInt(e -> e.id);
+        Set<Employee> employees = new TreeSet<>(byId);
+        employees.add(e1);
+        employees.add(e2);
+        employees.add(e3);
+        employees.add(e4);
+        employees.add(e5);
+
+        for(Employee e : employees){
+            System.out.println(e.id + " : " + e.name);
+        }
     }
 }
