@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class LinkedHashMapImplementation {
     public static void main(String[] args) {
+        // Find first non-repeating character
         String str = "swiss";
 
         Map<Character, Integer> map = new LinkedHashMap<>();

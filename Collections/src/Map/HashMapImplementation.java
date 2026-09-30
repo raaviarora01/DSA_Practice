@@ -28,5 +28,26 @@ public class HashMapImplementation {
         for(Map.Entry<Integer, Integer> entry : mergeMap.entrySet()){
             System.out.println(entry.getKey() + " -> " + entry.getValue());
         }
+
+        // Character frequency
+        String str = "programming";
+
+        Map<Character, Integer> charMap = new HashMap<>();
+
+        for(int i=0; i<str.length(); i++){
+            char c = str.charAt(i);
+            charMap.put(c, charMap.getOrDefault(c, 0) + 1);
+        }
+
+        int max = 0;
+        char mostFrequent = '\0';
+        for(Map.Entry<Character, Integer> entry : charMap.entrySet()){
+            if(entry.getValue() > max){
+                max = entry.getValue();
+                mostFrequent = entry.getKey();
+            }
+        }
+
+        System.out.println("Most frequent occuring character: " + mostFrequent + " -> " + max);
     }
 }
