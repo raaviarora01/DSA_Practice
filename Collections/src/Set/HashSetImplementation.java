@@ -1,5 +1,6 @@
 package Set;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,5 +21,24 @@ public class HashSetImplementation {
         }
 
         System.out.println(duplicates);
+
+        /* Set Operations */
+        Set<Integer> a = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5));
+        Set<Integer> b = new HashSet<>(Arrays.asList(4, 5, 6, 7));
+
+        // Intersection
+        Set<Integer> intersection = new HashSet<>(a);
+        intersection.retainAll(b);
+        System.out.println("Intersection: " + intersection);
+
+        // Union
+        Set<Integer> union = new HashSet<>(a);
+        union.addAll(b);
+        System.out.println("Union: " + union);
+
+        // Difference
+        Set<Integer> difference = new HashSet<>(a);
+        difference.removeAll(b);
+        System.out.println("Difference: " + difference);
     }
 }
