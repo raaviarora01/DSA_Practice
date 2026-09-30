@@ -28,11 +28,18 @@ public class ReverseAString {
         return sb.toString();
     }
 
-    public void reverseStringArray(char[] s) {
-        for(int i=0; i<s.length/2; i++){
-            char temp = s[i];
-            s[i] = s[s.length-i-1];
-            s[s.length-i-1] = temp;
+    // Optimal approach: Convert the string to a character array and swap characters in place.
+    // Time Complexity: O(n/2) = O(n) since we are iterating through half of the string.
+    // Space Complexity: O(n) for the character array.
+    public static String reverseStringOptimal(String s) {
+        char[] arr = s.toCharArray();
+        
+        for(int i=0; i<arr.length/2; i++){
+            char temp = arr[i];
+            arr[i] = arr[arr.length-i-1];
+            arr[arr.length-i-1] = temp;
         }
+        
+        return new String(arr);
     }
 }
