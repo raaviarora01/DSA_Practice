@@ -46,4 +46,25 @@ public class FirstUniqueCharacter {
 
         return -1;
     }
+
+    // Optimal Approach 2: Use this only for fixed character set (like lowercase English letters). Use an array to store the frequency of each character, then iterate through the string to find the first character with a frequency of 1.
+    // Time Complexity: O(n) since we are iterating through the string twice.
+    // Space Complexity: O(1) since we are using a fixed size array of 26 for lowercase English letters.
+    public int firstUniqCharOptimalApproach2(String s) {
+        int[] freq = new int[26];
+
+        for(int i=0; i<s.length(); i++){
+            char ch = s.charAt(i);
+            freq[ch - 'a']++;
+        }
+
+        for(int i=0; i<s.length(); i++){
+            char ch = s.charAt(i);
+            if(freq[ch - 'a'] == 1){
+                return i;
+            }
+        }
+
+        return -1;
+    }
 }
