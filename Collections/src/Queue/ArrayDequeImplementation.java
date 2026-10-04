@@ -1,10 +1,11 @@
 package Queue;
 
 import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class ArrayDequeImplementation {
     public static void main(String[] args) {
-        ArrayDeque<Integer> dq = new ArrayDeque<>();
+        Deque<Integer> dq = new ArrayDeque<>();
         dq.addFirst(20);
         dq.addFirst(10);
         dq.addLast(30);

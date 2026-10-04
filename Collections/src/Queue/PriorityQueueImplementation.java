@@ -31,5 +31,20 @@ public class PriorityQueueImplementation {
         while(!maxHeap.isEmpty()){
             System.out.println(maxHeap.poll());
         }
+
+        // Find Kth largest element
+        int k = 2;
+        int nums[] = new int[]{3, 2, 1, 5, 6, 4};
+        PriorityQueue<Integer> kthLargest = new PriorityQueue<>();
+
+        for(int num : nums){
+            kthLargest.offer(num);
+
+            if(kthLargest.size() > k){
+                kthLargest.poll();
+            }
+        }
+
+        System.out.println("2nd largest element: " + kthLargest.peek());
     }
 }
