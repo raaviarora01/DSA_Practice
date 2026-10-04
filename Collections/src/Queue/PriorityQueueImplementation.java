@@ -46,5 +46,26 @@ public class PriorityQueueImplementation {
         }
 
         System.out.println("2nd largest element: " + kthLargest.peek());
+
+        // Custom Task Priority
+        PriorityQueue<Task> tasks = new PriorityQueue<>(Comparator.comparingInt(task -> task.priority));
+        tasks.offer(new Task("Send email", 3));
+        tasks.offer(new Task("Fix production", 1));
+        tasks.offer(new Task("Code review", 2));
+
+        while(!tasks.isEmpty()){
+            Task task = tasks.poll();
+            System.out.println(task.name);
+        }
+    }
+}
+
+class Task{
+    String name;
+    int priority;
+
+    public Task(String name, int priority){
+        this.name = name;
+        this.priority = priority;
     }
 }
