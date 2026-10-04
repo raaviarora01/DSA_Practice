@@ -2,10 +2,7 @@ package Map;
 
 import List.StackImplementation;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class HashMapImplementation {
     public static void main(String[] args) {
@@ -69,6 +66,15 @@ public class HashMapImplementation {
         }
 
         System.out.println(departments);
+
+        // Custom HashMap Key
+        User u1 = new User(101, "Raavi");
+        User u2 = new User(101, "Raavi");
+
+        Map<User, String> users = new HashMap<>();
+        users.put(u1, "Client");
+
+        System.out.println(users.get(u2));
     }
 }
 
@@ -79,5 +85,31 @@ class Employee {
     public Employee(String name, String department){
         this.name = name;
         this.department = department;
+    }
+}
+
+class User {
+    int id;
+    String name;
+
+    public User(int id, String name){
+        this.id = id;
+        this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if(this == obj) return true;
+
+        if(obj == null || getClass() != obj.getClass()) return false;
+
+        User other = (User) obj;
+
+        return this.id == other.id && Objects.equals(name, other.name);
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(id, name);
     }
 }

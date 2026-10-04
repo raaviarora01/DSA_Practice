@@ -75,7 +75,7 @@ public class IntersectionOfTwoArrays {
     public int[] intersectionBetterApproach2(int[] nums1, int[] nums2) {
         // Ensure that we always iterate over the smaller array to minimize space usage
         if (nums1.length > nums2.length) {
-            return intersection(nums2, nums1);
+            return intersectionBetterApproach2(nums2, nums1);
         }
 
         Set<Integer> lookup = new HashSet<>();
