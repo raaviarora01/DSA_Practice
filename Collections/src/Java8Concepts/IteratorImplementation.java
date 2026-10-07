@@ -9,6 +9,7 @@ public class IteratorImplementation {
     public static void main(String[] args) {
         List<Integer> numbers =  new ArrayList<>(Arrays.asList(10, 15, 20, 25, 30, 35));
 
+        // Remove numbers not divisible by 10
         Iterator<Integer> iterator = numbers.iterator();
         while (iterator.hasNext()){
             if(iterator.next() % 10 != 0){
